@@ -1,111 +1,232 @@
-# MATRYOSHKA - An open-source ethical hacking tool (COMMING SOON)
-A digital forensics tool that detects and analyzes ephemeral communication channels and temporary artifacts left behind by malware, deleted files, and covert operations.
+# 🪆 MATRYOSHKA v2.0
+## Ephemeral Communication Analyzer & Nested Artifact Detection Tool
 
-## Features
+[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20macOS-lightgrey)](https://github.com/your-username/matryoshka)
 
-- **Temporary Artifact Hunter**: Scans temp directories for recently accessed files
-- **Deletion Signature Detector**: Finds evidence of recently deleted files
-- **Process Ghost Scanner**: Detects remnants of terminated processes
-- **Network Echo Analyzer**: Identifies traces of closed network connections
-- **SQLite Evidence Database**: Persistent storage of all findings
-- **Confidence Scoring**: Rates the reliability of each detection
-- **Timeline Reconstruction**: Builds chronological view of ghost activities
+**MATRYOSHKA** is an advanced digital forensics tool designed to detect and analyze ephemeral communication channels and nested artifacts that malware uses to hide its tracks. Like a Russian nesting doll (Matryoshka), it progressively opens layers of hidden system artifacts to reveal covert communications.
 
-## Quick Start
+## 🎯 Key Features
 
-### Installation
+- **🔍 Multi-Layer Analysis**: Progressive examination of 6 distinct artifact layers
+- **🚨 Threat Intelligence**: Automated IOC extraction with confidence scoring  
+- **⚡ Enhanced Performance**: Concurrent processing for faster analysis
+- **🔐 Privilege Awareness**: Adapts analysis depth based on execution privileges
+- **📊 Comprehensive Reporting**: Detailed findings with threat level classification
+- **🪟 Cross-Platform**: Full support for Windows, Linux, and macOS
+- **📋 IOC Export**: Standard format export for SIEM and threat intelligence platforms
+- **🧠 Memory Analysis**: Detection of shared memory and IPC artifacts
+- **📝 Registry Scanning**: Windows registry analysis for persistence mechanisms
+- **⏰ Timestomp Detection**: Identifies timestamp manipulation attempts
+
+## 🏗️ Architecture
+
+MATRYOSHKA employs a layered detection approach:
+
+```
+🪆 Layer 1: Surface Artifacts      - Recent temporary files & directories
+🪆 Layer 2: Deletion Traces        - Cleared logs & emptied communication files  
+🪆 Layer 3: Process Remnants       - Orphaned process artifacts & hidden directories
+🪆 Layer 4: Network Shadows        - Covert channel traces & suspicious connections
+🪆 Layer 5: Memory Artifacts       - Shared memory segments & IPC mechanisms
+🪆 Layer 6: Registry Artifacts     - Windows persistence & configuration traces
+```
+
+## 🚀 Quick Start
+
+### Prerequisites
 ```bash
-git clone https://github.com/matlabmatryoshka/MATRYOSHKA
-cd MATRYOSHKA
-chmod +x install.sh
-sudo ./install.sh
+pip install psutil argparse pathlib
 ```
 
-### Usage
+### Basic Usage
 ```bash
-# Run comprehensive scan
-MATRYOSHKA --scan
+# Standard analysis
+python matryoshka.py --open
 
-# View previous findings
-MATRYOSHKA --report
+# Privileged analysis (recommended)
+sudo python matryoshka.py --open --verbose
 
-# Use short alias
-MATR --scan
+# Generate previous report
+python matryoshka.py --report
+
+# Export IOCs for threat intelligence
+python matryoshka.py --export-iocs --output threats.json
 ```
 
-## Sample Output
-```
-[+] MATRYOSHKA v1.0 - Starting comprehensive scan...
-[*] Scanning temporary directories for ghost artifacts...
-[*] Scanning for deleted file signatures...
-[*] Scanning for hidden process artifacts...
-[*] Scanning for network connection echoes...
-
-============================================================
-MATRYOSHKA DETECTION REPORT
-============================================================
-
-[TEMPORARY_ARTIFACTS] - 3 artifacts found:
-----------------------------------------
-  [●●●●●●●○○○] recent_temp_file
-     Location: /tmp/.hidden_comm_12345
-     Description: Recently accessed temp file (accessed 45s ago)
-     Timestamp: 2025-08-17T14:30:25
-
-[NETWORK_ECHOES] - 1 artifacts found:
-----------------------------------------
-  [●●●●○○○○○○] recent_connection_close
-     Location: 192.168.1.100:8080
-     Description: Recently closed connection on unusual port 8080
-     Timestamp: 2025-08-17T14:29:15
-
-Total hidden artifacts detected: 4
-```
-
-## Advanced Features
-
-### Database Analysis
+### Custom Configuration
 ```bash
-# View database directly
-sqlite3 matryoshka.db
-sqlite> SELECT * FROM natryoshka_findings ORDER BY confidence_score DESC;
+# Use custom detection rules
+python matryoshka.py --config custom_config.json --open
+
+# Specify custom database
+python matryoshka.py --db investigation.db --open
 ```
 
-### Custom Scans
+## 📖 Configuration
+
+MATRYOSHKA supports extensive customization through JSON configuration files:
+
+```json
+{
+  "max_file_size": 104857600,
+  "recent_threshold_hours": 2,
+  "hash_algorithm": "sha256",
+  "max_workers": 4,
+  "suspicious_ports": [31337, 31338, 4444, 8080],
+  "analysis_options": {
+    "enable_registry_scan": true,
+    "enable_memory_scan": true,
+    "parallel_processing": true
+  }
+}
+```
+
+## 📊 Sample Output
+
+```
+🪆 MATRYOSHKA ENHANCED ANALYSIS REPORT 🪆
+===============================================================================
+
+🎯 THREAT SUMMARY:
+   🔴 HIGH:     3 artifacts
+   🟡 MEDIUM:   7 artifacts  
+   🟢 LOW:     12 artifacts
+   📊 TOTAL:   22 artifacts
+
+🪆 LAYER 4: Network Shadows - 3 artifacts
+   Threats: 🔴2 🟡1 🟢0
+────────────────────────────────────────────────────────────
+  🔴 [🔍🔍🔍🔍🔍🔍] covert_channel_trace
+     📍 Location: 127.0.0.1:31337
+     📝 Description: CRITICAL: Covert channel port 31337 - deep layer communication
+     ⚠️  Threat Level: HIGH
+
+🚨 INDICATORS OF COMPROMISE (IOCs):
+   Total IOCs: 8
+   High Confidence: 3
+
+🚨 CRITICAL ALERT: Multiple high-threat artifacts detected!
+   🔍 Immediate investigation recommended
+   🛡️  System may be compromised
+```
+
+## 🛡️ Detection Capabilities
+
+### Ephemeral Communication Channels
+- **Temporary Files**: Recent artifacts in temp directories
+- **Memory-Only Communications**: Shared memory segments and IPC
+- **Network Covert Channels**: Suspicious port usage and connection patterns
+- **Process Artifacts**: Orphaned process remnants and hidden directories
+
+### Anti-Forensics Detection  
+- **Timestamp Manipulation**: Detection of timestomping attempts
+- **Log Clearing**: Recently emptied log files and communication traces
+- **Hidden Artifacts**: Concealed files and registry entries
+- **Privilege Escalation**: Protected artifact access attempts
+
+### Malware Persistence
+- **Registry Persistence**: Windows registry analysis for persistence mechanisms
+- **Service Modifications**: System service tampering detection
+- **Startup Programs**: Unauthorized startup entries
+- **DLL Injection**: Suspicious library loading patterns
+
+## 🔧 Advanced Usage
+
+### Custom Analysis Workflows
 ```python
-from MATRYOSHKA import MATRYOSHKA
+from matryoshka import Matryoshka
 
-matryoshka = MATRYOSHKA()
-matryoshka.scan_temp_directories()
-matryoshka.generate_report()
+# Initialize with custom configuration
+analyzer = Matryoshka(db_path="custom.db", config_path="rules.json")
+
+# Run specific layer analysis
+surface_findings = analyzer.peek_surface_layer()
+network_findings = analyzer.discover_deepest_layer()
+
+# Export findings
+ioc_report = analyzer.export_ioc_report()
 ```
 
-## Detection Categories
+### Integration with SIEM Systems
+```bash
+# Export IOCs in standard format
+python matryoshka.py --export-iocs --output iocs.json
 
-- **temporary_artifacts**: Recently accessed temp files
-- **deletion_artifacts**: Evidence of deleted files
-- **process_matryoshka**: Remnants of terminated processes  
-- **network_echoes**: Traces of closed connections
+# Integration example with Splunk/ELK
+cat iocs.json | jq '.indicators.network_endpoints[] | select(.confidence > 0.8)'
+```
 
-## Requirements
+## 🎛️ Command Line Options
 
-- Python 3.6+
-- psutil library
-- Linux/Windows/macOS support
-- Root/Administrator privileges recommended
+| Option | Description |
+|--------|-------------|
+| `--open` | Execute full multi-layer analysis |
+| `--report` | Display findings from previous sessions |
+| `--export-iocs` | Export IOCs in JSON format |
+| `--config FILE` | Use custom configuration file |
+| `--db FILE` | Specify database file path |
+| `--output FILE` | Output file for IOC export |
+| `--verbose` | Enable detailed logging |
+| `--monitor` | Real-time monitoring mode (future feature) |
 
-## Contributing
+## 🏢 Enterprise Features
 
-1. Fork the repository
-2. Create a feature branch
-3. Add new detection modules
-4. Submit pull request
+### Threat Intelligence Integration
+- **IOC Confidence Scoring**: Machine learning-based artifact classification
+- **MITRE ATT&CK Mapping**: Technique identification and mapping
+- **Threat Actor Profiling**: Behavioral pattern analysis
+- **Timeline Construction**: Chronological artifact correlation
 
-## Roadmap
+### Scalability & Performance
+- **Concurrent Processing**: Multi-threaded analysis for large systems
+- **Memory Optimization**: Efficient handling of large artifact datasets
+- **Distributed Analysis**: Network-wide deployment capabilities
+- **API Integration**: RESTful API for automated incident response
 
-- [ ] Memory dump analysis integration
-- [ ] Registry ghost detection (Windows)
-- [ ] Network packet reconstruction
-- [ ] Machine learning anomaly detection
-- [ ] Web dashboard interface
-- [ ] Integration with YARA rules
+## 📈 Use Cases
+
+### Digital Forensics
+- **Incident Response**: Rapid triage of compromised systems
+- **Malware Analysis**: Detection of covert communication mechanisms
+- **Evidence Collection**: Comprehensive artifact documentation
+- **Timeline Analysis**: Reconstruction of attack progression
+
+### Threat Hunting
+- **Proactive Detection**: Identification of advanced persistent threats
+- **IOC Development**: Creation of custom detection signatures
+- **Behavioral Analysis**: Pattern recognition in system artifacts
+- **Intelligence Gathering**: Collection of threat intelligence data
+
+### Security Operations
+- **SIEM Enhancement**: Enrichment of security event data
+- **Automated Analysis**: Integration with security orchestration platforms
+- **Compliance Auditing**: Verification of security control effectiveness
+- **Threat Assessment**: Risk evaluation of detected artifacts
+
+## 🤝 Contributing
+
+I wholeheartedly welcome all possible contributions! Please see the [Contributing Guidelines](CONTRIBUTING.md) for details.
+
+### Development Setup
+```bash
+git clone https://github.com/your-username/matryoshka.git
+cd matryoshka
+pip install -r requirements.txt
+python -m pytest tests/
+```
+
+## ⚠️ Legal Disclaimer
+
+MATRYOSHKA is designed for legitimate digital forensics and cybersecurity purposes. Users are responsible for ensuring compliance with applicable laws and regulations. The authors assume no liability for misuse of this tool.
+
+## 🙏 Acknowledgments
+
+- Inspired by the concept of Russian nesting dolls (Matryoshka)
+- Built upon the excellent `psutil` library for system analysis
+- Thanks to the digital forensics community for inspiration and feedback!
+
+---
+
+**Made for the digital forensics community**
