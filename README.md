@@ -228,5 +228,3 @@ MATRYOSHKA is designed for legitimate digital forensics and cybersecurity purpos
 - Thanks to the digital forensics community for inspiration and feedback!
 
 ---
-
-**Made for the digital forensics community**
