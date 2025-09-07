@@ -50,8 +50,8 @@ pip install -r requirements.txt
 
 ### Quick Install
 ```bash
-git clone https://github.com/your-username/matryoshka-enhanced.git
-cd matryoshka-enhanced
+git clone https://github.com/techmatryoshka/MATRYOSHKA-Digital-Forensics-Tool.git
+cd matryoshka
 pip install -r requirements.txt
 ```
 
@@ -60,25 +60,25 @@ pip install -r requirements.txt
 ### Basic Analysis
 ```bash
 # Standard analysis with default settings
-python matryoshka_enhanced.py --analyze
+python matryoshka.py --analyze
 
 # Analysis with elevated privileges (recommended)
-sudo python matryoshka_enhanced.py --analyze
+sudo python matryoshka.py --analyze
 
 # Analysis with detailed logging
-python matryoshka_enhanced.py --analyze --log-level DEBUG --log-file analysis.log
+python matryoshka.py --analyze --log-level DEBUG --log-file analysis.log
 ```
 
 ### Advanced Usage
 ```bash
 # Custom configuration with report export
-python matryoshka_enhanced.py --analyze --config custom_config.json --export-report
+python matryoshka.py --analyze --config custom_config.json --export-report
 
 # Export existing findings to report
-python matryoshka_enhanced.py --export-report --output detailed_report.json
+python matryoshka.py --export-report --output detailed_report.json
 
 # Specify custom database and working directory
-python matryoshka_enhanced.py --analyze --db /secure/location/evidence.db --work-dir /tmp/analysis
+python matryoshka.py --analyze --db /secure/location/evidence.db --work-dir /tmp/analysis
 ```
 
 ### Configuration File
@@ -180,7 +180,7 @@ Confidence levels (0.0-1.0) based on:
 ```json
 {
   "metadata": {
-    "tool": "Matryoshka Enhanced v2.1",
+    "tool": "Matryoshka v2.0",
     "export_timestamp": "2025-01-15T10:30:00",
     "session_id": "SESSION_1642246200_1234",
     "total_findings": 42
@@ -263,7 +263,7 @@ This tool is designed for legitimate forensic investigation and system administr
 
 - **Issues**: Please report bugs and feature requests via GitHub Issues
 - **Documentation**: Additional documentation available in the `/docs` directory
-- **Security**: Report security vulnerabilities privately to [security@example.com]
+- **Security**: Report security vulnerabilities privately to matlabmatryoshka@gmail.com
 
 ## Acknowledgments
 
