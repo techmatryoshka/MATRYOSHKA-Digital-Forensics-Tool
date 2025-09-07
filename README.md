@@ -38,11 +38,6 @@ A secure, enterprise-grade digital forensics tool for uncovering hidden layers o
 - Python 3.8 or higher
 - Required system privileges for deep analysis (administrator/root recommended)
 
-### Dependencies
-```bash
-pip install -r requirements.txt
-```
-
 **Required packages:**
 - `psutil >= 5.8.0`
 - `sqlite3` (included with Python)
