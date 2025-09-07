@@ -5,68 +5,90 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20macOS-lightgrey)](https://github.com/your-username/matryoshka)
 
-**MATRYOSHKA** is an advanced digital forensics tool designed to detect and analyze ephemeral communication channels and nested artifacts that malware uses to hide its tracks. Like a Russian nesting doll (Matryoshka), it progressively opens layers of hidden system artifacts to reveal covert communications.
+# Matryoshka Enhanced v2.1
 
-## 🎯 Key Features
+[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Security: Enhanced](https://img.shields.io/badge/Security-Enhanced-green.svg)](https://github.com/your-username/matryoshka)
 
-- **🔍 Multi-Layer Analysis**: Progressive examination of 6 distinct artifact layers
-- **🚨 Threat Intelligence**: Automated IOC extraction with confidence scoring  
-- **⚡ Enhanced Performance**: Concurrent processing for faster analysis
-- **🔐 Privilege Awareness**: Adapts analysis depth based on execution privileges
-- **📊 Comprehensive Reporting**: Detailed findings with threat level classification
-- **🪟 Cross-Platform**: Full support for Windows, Linux, and macOS
-- **📋 IOC Export**: Standard format export for SIEM and threat intelligence platforms
-- **🧠 Memory Analysis**: Detection of shared memory and IPC artifacts
-- **📝 Registry Scanning**: Windows registry analysis for persistence mechanisms
-- **⏰ Timestomp Detection**: Identifies timestamp manipulation attempts
+A secure, enterprise-grade digital forensics tool for uncovering hidden layers of ephemeral communication channels and nested artifacts. Like a Russian nesting doll, Matryoshka reveals what's hidden deep within systems through systematic layer analysis.
 
-## 🏗️ Architecture
+## Features
 
-MATRYOSHKA employs a layered detection approach:
+### Core Capabilities
+- **Multi-layer artifact detection** across filesystem, memory, network, and registry
+- **Advanced timestomp detection** with multiple behavioral indicators
+- **Threat scoring system** with formal confidence metrics
+- **Cross-platform support** for Windows, Linux, and macOS
+- **Chain of custody tracking** for forensic evidence integrity
+- **IOC extraction and export** in standard formats
 
-```
-🪆 Layer 1: Surface Artifacts      - Recent temporary files & directories
-🪆 Layer 2: Deletion Traces        - Cleared logs & emptied communication files  
-🪆 Layer 3: Process Remnants       - Orphaned process artifacts & hidden directories
-🪆 Layer 4: Network Shadows        - Covert channel traces & suspicious connections
-🪆 Layer 5: Memory Artifacts       - Shared memory segments & IPC mechanisms
-🪆 Layer 6: Registry Artifacts     - Windows persistence & configuration traces
-```
+### Security Enhancements (v2.1)
+- **Input validation and sanitization** with path traversal protection
+- **Secure database operations** with integrity checks
+- **Memory-safe file operations** with configurable size limits
+- **Privilege escalation detection** and secure temporary file handling
+- **Configuration parameter validation** with type checking
+- **Comprehensive audit logging** with rotation support
 
-## 🚀 Quick Start
+### Forensic Methodology
+- **Evidence-based analysis** with unique identifiers and timestamps
+- **Formal threat assessment** using weighted indicator scoring
+- **Session integrity** with cryptographic verification
+- **Detailed reporting** with provenance tracking
+- **Concurrent processing** for performance optimization
+
+## Installation
 
 ### Prerequisites
+- Python 3.8 or higher
+- Required system privileges for deep analysis (administrator/root recommended)
+
+### Dependencies
 ```bash
-pip install psutil argparse pathlib
+pip install -r requirements.txt
 ```
 
-### Basic Usage
+**Required packages:**
+- `psutil >= 5.8.0`
+- `sqlite3` (included with Python)
+- `pathlib` (included with Python 3.4+)
+
+### Quick Install
 ```bash
-# Standard analysis
-python matryoshka.py --open
-
-# Privileged analysis (recommended)
-sudo python matryoshka.py --open --verbose
-
-# Generate previous report
-python matryoshka.py --report
-
-# Export IOCs for threat intelligence
-python matryoshka.py --export-iocs --output threats.json
+git clone https://github.com/your-username/matryoshka-enhanced.git
+cd matryoshka-enhanced
+pip install -r requirements.txt
 ```
 
-### Custom Configuration
-```bash
-# Use custom detection rules
-python matryoshka.py --config custom_config.json --open
+## Usage
 
-# Specify custom database
-python matryoshka.py --db investigation.db --open
+### Basic Analysis
+```bash
+# Standard analysis with default settings
+python matryoshka_enhanced.py --analyze
+
+# Analysis with elevated privileges (recommended)
+sudo python matryoshka_enhanced.py --analyze
+
+# Analysis with detailed logging
+python matryoshka_enhanced.py --analyze --log-level DEBUG --log-file analysis.log
 ```
 
-## 📖 Configuration
+### Advanced Usage
+```bash
+# Custom configuration with report export
+python matryoshka_enhanced.py --analyze --config custom_config.json --export-report
 
-MATRYOSHKA supports extensive customization through JSON configuration files:
+# Export existing findings to report
+python matryoshka_enhanced.py --export-report --output detailed_report.json
+
+# Specify custom database and working directory
+python matryoshka_enhanced.py --analyze --db /secure/location/evidence.db --work-dir /tmp/analysis
+```
+
+### Configuration File
+Create a JSON configuration file for custom settings:
 
 ```json
 {
@@ -74,157 +96,183 @@ MATRYOSHKA supports extensive customization through JSON configuration files:
   "recent_threshold_hours": 2,
   "hash_algorithm": "sha256",
   "max_workers": 4,
-  "suspicious_ports": [31337, 31338, 4444, 8080],
-  "analysis_options": {
-    "enable_registry_scan": true,
-    "enable_memory_scan": true,
-    "parallel_processing": true
-  }
+  "max_depth_analysis": 1000,
+  "suspicious_ports": [4444, 5555, 6666, 31337, 31338, 31339],
+  "temp_paths_unix": ["/tmp", "/var/tmp", "/dev/shm"],
+  "temp_paths_windows": ["%TEMP%", "%TMP%", "C:\\Windows\\Temp"]
 }
 ```
 
-## 📊 Sample Output
-
-```
-🪆 MATRYOSHKA ENHANCED ANALYSIS REPORT 🪆
-===============================================================================
-
-🎯 THREAT SUMMARY:
-   🔴 HIGH:     3 artifacts
-   🟡 MEDIUM:   7 artifacts  
-   🟢 LOW:     12 artifacts
-   📊 TOTAL:   22 artifacts
-
-🪆 LAYER 4: Network Shadows - 3 artifacts
-   Threats: 🔴2 🟡1 🟢0
-────────────────────────────────────────────────────────────
-  🔴 [🔍🔍🔍🔍🔍🔍] covert_channel_trace
-     📍 Location: 127.0.0.1:31337
-     📝 Description: CRITICAL: Covert channel port 31337 - deep layer communication
-     ⚠️  Threat Level: HIGH
-
-🚨 INDICATORS OF COMPROMISE (IOCs):
-   Total IOCs: 8
-   High Confidence: 3
-
-🚨 CRITICAL ALERT: Multiple high-threat artifacts detected!
-   🔍 Immediate investigation recommended
-   🛡️  System may be compromised
-```
-
-## 🛡️ Detection Capabilities
-
-### Ephemeral Communication Channels
-- **Temporary Files**: Recent artifacts in temp directories
-- **Memory-Only Communications**: Shared memory segments and IPC
-- **Network Covert Channels**: Suspicious port usage and connection patterns
-- **Process Artifacts**: Orphaned process remnants and hidden directories
-
-### Anti-Forensics Detection  
-- **Timestamp Manipulation**: Detection of timestomping attempts
-- **Log Clearing**: Recently emptied log files and communication traces
-- **Hidden Artifacts**: Concealed files and registry entries
-- **Privilege Escalation**: Protected artifact access attempts
-
-### Malware Persistence
-- **Registry Persistence**: Windows registry analysis for persistence mechanisms
-- **Service Modifications**: System service tampering detection
-- **Startup Programs**: Unauthorized startup entries
-- **DLL Injection**: Suspicious library loading patterns
-
-## 🔧 Advanced Usage
-
-### Custom Analysis Workflows
-```python
-from matryoshka import Matryoshka
-
-# Initialize with custom configuration
-analyzer = Matryoshka(db_path="custom.db", config_path="rules.json")
-
-# Run specific layer analysis
-surface_findings = analyzer.peek_surface_layer()
-network_findings = analyzer.discover_deepest_layer()
-
-# Export findings
-ioc_report = analyzer.export_ioc_report()
-```
-
-### Integration with SIEM Systems
-```bash
-# Export IOCs in standard format
-python matryoshka.py --export-iocs --output iocs.json
-
-# Integration example with Splunk/ELK
-cat iocs.json | jq '.indicators.network_endpoints[] | select(.confidence > 0.8)'
-```
-
-## 🎛️ Command Line Options
+## Command Line Options
 
 | Option | Description |
 |--------|-------------|
-| `--open` | Execute full multi-layer analysis |
-| `--report` | Display findings from previous sessions |
-| `--export-iocs` | Export IOCs in JSON format |
-| `--config FILE` | Use custom configuration file |
-| `--db FILE` | Specify database file path |
-| `--output FILE` | Output file for IOC export |
-| `--verbose` | Enable detailed logging |
-| `--monitor` | Real-time monitoring mode (future feature) |
+| `--analyze` | Run comprehensive forensic analysis |
+| `--export-report` | Export findings in JSON report format |
+| `--config FILE` | Use custom configuration file (JSON) |
+| `--db FILE` | Custom database file path |
+| `--output FILE` | Output file for reports |
+| `--log-file FILE` | Log file path |
+| `--log-level LEVEL` | Logging level (DEBUG/INFO/WARNING/ERROR) |
+| `--work-dir DIR` | Working directory for temporary files |
 
-## 🏢 Enterprise Features
+## Analysis Layers
 
-### Threat Intelligence Integration
-- **IOC Confidence Scoring**: Machine learning-based artifact classification
-- **MITRE ATT&CK Mapping**: Technique identification and mapping
-- **Threat Actor Profiling**: Behavioral pattern analysis
-- **Timeline Construction**: Chronological artifact correlation
+Matryoshka analyzes systems through multiple detection layers:
 
-### Scalability & Performance
-- **Concurrent Processing**: Multi-threaded analysis for large systems
-- **Memory Optimization**: Efficient handling of large artifact datasets
-- **Distributed Analysis**: Network-wide deployment capabilities
-- **API Integration**: RESTful API for automated incident response
+### Layer 1: Surface Artifacts
+- Recent temporary files and cache entries
+- Hidden files and suspicious naming patterns
+- File access time analysis with security validation
 
-## 📈 Use Cases
+### Layer 2: Memory Artifacts
+- Shared memory segments (/dev/shm analysis)
+- Memory-mapped files and IPC traces
+- Semaphore and communication artifacts
 
-### Digital Forensics
-- **Incident Response**: Rapid triage of compromised systems
-- **Malware Analysis**: Detection of covert communication mechanisms
-- **Evidence Collection**: Comprehensive artifact documentation
-- **Timeline Analysis**: Reconstruction of attack progression
+### Layer 3: Process Remnants
+- Orphaned process artifacts and traces
+- Hidden directories and communication endpoints
+- Process communication shadows
 
-### Threat Hunting
-- **Proactive Detection**: Identification of advanced persistent threats
-- **IOC Development**: Creation of custom detection signatures
-- **Behavioral Analysis**: Pattern recognition in system artifacts
-- **Intelligence Gathering**: Collection of threat intelligence data
+### Layer 4: Network Shadows
+- Suspicious network connections and ports
+- Covert channel detection on non-standard ports
+- Local communication loop analysis
 
-### Security Operations
-- **SIEM Enhancement**: Enrichment of security event data
-- **Automated Analysis**: Integration with security orchestration platforms
-- **Compliance Auditing**: Verification of security control effectiveness
-- **Threat Assessment**: Risk evaluation of detected artifacts
+### Layer 5: Registry Artifacts (Windows)
+- Ephemeral registry keys and values
+- Persistence mechanism detection
+- Recently modified registry entries
 
-## 🤝 Contributing
+## Threat Assessment
 
-I wholeheartedly welcome all possible contributions! Please see the [Contributing Guidelines](CONTRIBUTING.md) for details.
+### Threat Levels
+- **CRITICAL**: Multiple high-confidence indicators, potential system compromise
+- **HIGH**: Advanced techniques detected, immediate investigation recommended
+- **MEDIUM**: Suspicious activities requiring monitoring
+- **LOW**: Standard system artifacts with minimal risk
 
-### Development Setup
-```bash
-git clone https://github.com/your-username/matryoshka.git
-cd matryoshka
-pip install -r requirements.txt
-python -m pytest tests/
+### Confidence Scoring
+Confidence levels (0.0-1.0) based on:
+- Indicator reliability and correlation
+- Evidence quality and completeness
+- Analysis depth and verification
+- Historical threat intelligence
+
+## Security Features
+
+### Data Protection
+- Database files created with restrictive permissions (0o600)
+- Secure temporary file handling with automatic cleanup
+- Memory-safe operations with configurable limits
+- Input validation preventing directory traversal attacks
+
+### Audit Trail
+- Complete chain of custody for all evidence
+- Session integrity with cryptographic verification
+- Comprehensive logging with rotation support
+- Evidence provenance tracking
+
+### Access Control
+- Privilege level detection and reporting
+- Secure database operations with foreign key constraints
+- Configuration parameter validation
+- Resource usage limits and monitoring
+
+## Output Formats
+
+### Analysis Report Structure
+```json
+{
+  "metadata": {
+    "tool": "Matryoshka Enhanced v2.1",
+    "export_timestamp": "2025-01-15T10:30:00",
+    "session_id": "SESSION_1642246200_1234",
+    "total_findings": 42
+  },
+  "findings": [
+    {
+      "evidence_id": "EVID_1642246200123456_1234",
+      "timestamp": "2025-01-15T10:25:00",
+      "artifact_type": "surface_artifact",
+      "location": "/tmp/suspicious_file.tmp",
+      "threat_level": "HIGH",
+      "confidence": 0.85,
+      "indicators": ["hidden_files", "suspicious_naming"],
+      "chain_of_custody": [...]
+    }
+  ]
+}
 ```
 
-## ⚠️ Legal Disclaimer
+## Performance Considerations
 
-MATRYOSHKA is designed for legitimate digital forensics and cybersecurity purposes. Users are responsible for ensuring compliance with applicable laws and regulations. The authors assume no liability for misuse of this tool.
+- **Concurrent Processing**: Configurable worker threads for directory analysis
+- **Memory Management**: File size limits prevent memory exhaustion
+- **Database Optimization**: Indexed operations with WAL mode
+- **Resource Limits**: Configurable analysis depth to prevent infinite recursion
 
-## 🙏 Acknowledgments
+## Contributing
 
-- Inspired by the concept of Russian nesting dolls (Matryoshka)
-- Built upon the excellent `psutil` library for system analysis
-- Thanks to the digital forensics community for inspiration and feedback!
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/enhancement`)
+3. Commit your changes (`git commit -am 'Add new detection capability'`)
+4. Push to the branch (`git push origin feature/enhancement`)
+5. Create a Pull Request
 
----
+### Development Guidelines
+- Follow PEP 8 style guidelines
+- Add type hints for new functions
+- Include comprehensive docstrings
+- Write unit tests for new features
+- Update documentation for API changes
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Security Considerations
+
+### Responsible Use
+This tool is designed for legitimate forensic investigation and system administration purposes. Users are responsible for:
+- Obtaining proper authorization before analysis
+- Complying with applicable laws and regulations
+- Protecting sensitive information discovered during analysis
+- Following organizational security policies
+
+### Limitations
+- Requires appropriate system privileges for complete analysis
+- Some artifacts may be missed on heavily restricted systems
+- Anti-forensics techniques may limit detection capabilities
+- Performance varies based on system resources and permissions
+
+## Changelog
+
+### v2.1 (Current)
+- Enhanced security validation with path traversal protection
+- Formal threat scoring system with confidence metrics
+- Chain of custody tracking for evidence integrity
+- Advanced timestomp detection algorithms
+- Secure database operations with integrity checks
+- Comprehensive logging with rotation support
+- Memory-safe file operations with size limits
+
+### v2.0
+- Initial multi-layer analysis implementation
+- Cross-platform compatibility
+- Basic threat detection and IOC export
+- Database storage for findings
+- Concurrent processing support
+
+## Support
+
+- **Issues**: Please report bugs and feature requests via GitHub Issues
+- **Documentation**: Additional documentation available in the `/docs` directory
+- **Security**: Report security vulnerabilities privately to [security@example.com]
+
+## Acknowledgments
+
+- Digital forensics community for methodology guidance
+- Security researchers for threat intelligence patterns
+- Open source contributors for dependency libraries
