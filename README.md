@@ -3,12 +3,6 @@
 
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20macOS-lightgrey)](https://github.com/your-username/matryoshka)
-
-# Matryoshka Enhanced v2.1
-
-[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Security: Enhanced](https://img.shields.io/badge/Security-Enhanced-green.svg)](https://github.com/your-username/matryoshka)
 
 A secure, enterprise-grade digital forensics tool for uncovering hidden layers of ephemeral communication channels and nested artifacts. Like a Russian nesting doll, Matryoshka reveals what's hidden deep within systems through systematic layer analysis.
