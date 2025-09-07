@@ -407,13 +407,6 @@ Contributors will be recognized in:
 - **GitHub Discussions**: General questions and community discussions
 - **Security Issues and Further Inquiries**: matlabmatryoshka@gmail.com
 
-### Mentorship Program
-New contributors can get paired with experienced developers for:
-- Code review and feedback
-- Forensics domain knowledge transfer
-- Development environment setup
-- Best practices guidance
-
 ## 🎓 Learning Resources
 
 ### Forensics & Malware Analysis
