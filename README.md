@@ -257,11 +257,5 @@ This tool is designed for legitimate forensic investigation and system administr
 ## Support
 
 - **Issues**: Please report bugs and feature requests via GitHub Issues
-- **Documentation**: Additional documentation available in the `/docs` directory
+- **Documentation**: Additional documentation will be uploaded within the repository if needed
 - **Security**: Report security vulnerabilities privately to matlabmatryoshka@gmail.com
-
-## Acknowledgments
-
-- Digital forensics community for methodology guidance
-- Security researchers for threat intelligence patterns
-- Open source contributors for dependency libraries
