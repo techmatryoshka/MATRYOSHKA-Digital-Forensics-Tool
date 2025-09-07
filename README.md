@@ -1,4 +1,4 @@
-# 🪆 MATRYOSHKA v2.0
+# 🎎 MATRYOSHKA v2.0
 ## Ephemeral Communication Analyzer & Nested Artifact Detection Tool
 
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
