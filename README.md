@@ -236,9 +236,9 @@ This tool is designed for legitimate forensic investigation and system administr
 - Anti-forensics techniques may limit detection capabilities
 - Performance varies based on system resources and permissions
 
-## Changelog
+## CHANGELOG
 
-### v2.1 (Current)
+### v2.0 (Current)
 - Enhanced security validation with path traversal protection
 - Formal threat scoring system with confidence metrics
 - Chain of custody tracking for evidence integrity
@@ -247,7 +247,7 @@ This tool is designed for legitimate forensic investigation and system administr
 - Comprehensive logging with rotation support
 - Memory-safe file operations with size limits
 
-### v2.0
+### v1.0
 - Initial multi-layer analysis implementation
 - Cross-platform compatibility
 - Basic threat detection and IOC export
