@@ -17,7 +17,7 @@ A secure, enterprise-grade digital forensics tool for uncovering hidden layers o
 - **Chain of custody tracking** for forensic evidence integrity
 - **IOC extraction and export** in standard formats
 
-### Security Enhancements (v2.1)
+### Security Enhancements
 - **Input validation and sanitization** with path traversal protection
 - **Secure database operations** with integrity checks
 - **Memory-safe file operations** with configurable size limits
